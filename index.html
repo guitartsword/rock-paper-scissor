@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>Rock|Paper|Scissor</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+
+<body>
+  <div class="player-area">
+    <h1 id="player1Name">Player 1</h1>
+    <button onclick="player1.rock()">Rock [Z]</button>
+    <button onclick="player1.paper()">Paper [X]</button>
+    <button onclick="player1.scissor()">Scissor [C]</button>
+  </div>
+  <div class="player-area">
+    <h1 id="player2Name">Player 2</h1>
+    <button onclick="player2.rock()">Rock [B]</button>
+    <button onclick="player2.paper()">Paper [N]</button>
+    <button onclick="player2.scissor()">Scissor [M]</button>
+  </div>
+  <button class="playAgain"> Play Again [Space Bar]</button>
+  <div>
+    Player 1 choose: <span id="player1Choose"></span>
+  </div>
+  <div>
+    Player 2 choose: <span id="player2Choose"></span>
+  </div>
+
+  
+</body>
+</html>
