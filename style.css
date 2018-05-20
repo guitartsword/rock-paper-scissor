@@ -1,12 +1,63 @@
-
-.player-area {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 1px solid blue;
+* {
+  box-sizing: border-box;
 }
-
 body {
   margin: 0;
   height: 100vh;
   width: 100vw;
+}
+img{
+  max-width: 100%;
+  max-height: 100%;
+}
+#countdown{
+  font-size: 3em;
+  color: rgb(11, 0, 77);
+}
+
+.player-area {
+  width: 50%;
+  height: 100%;
+  border: 1px solid blue;
+}
+.img-container{
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 10px 1px rgb(9, 0, 90);
+
+}
+.flex-area {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 50%;
+  justify-content: space-around;
+}
+.flex-area div{
+  text-align: center;
+}
+/* From animate.css */
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to { 
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse {
+  animation-name: pulse;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
 }
