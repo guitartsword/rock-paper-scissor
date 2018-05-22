@@ -10,28 +10,29 @@
   href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css"
   integrity="sha384-OHBBOqpYHNsIqQy8hL1U+8OXf9hH6QRxi0+EODezv82DfnZoV7qoHAZDwMwEJvSw"
   crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   <script src="script.js"></script>
 </head>
 
 <body>
   <div class="flex-area">
-    <div class="player-area">
+    <div class="player-area player1">
       <div>
         <h1 id="player1Name">Player 1</h1>
-        <button onclick="player1.rock()">Rock [Z]</button>
-        <button onclick="player1.paper()">Paper [X]</button>
-        <button onclick="player1.scissor()">Scissor [C]</button>
+        <div class="btn" ontouch="player1.rock()" onclick="player1.rock()"><i class="fas fa-hand-rock"></i></div>
+        <div class="btn" ontouch="player1.paper()" onclick="player1.paper()"><i class="fas fa-hand-paper"></i></div>
+        <div class="btn" ontouch="player1.scissors()" onclick="player1.scissors()"><i class="fas fa-hand-scissors"></i></div>
       </div>
     </div>
-    <div class="player-area">
+    <div class="player-area player2">
       <h1 id="player2Name">Player 2</h1>
-      <button onclick="player2.rock()">Rock [B]</button>
-      <button onclick="player2.paper()">Paper [N]</button>
-      <button onclick="player2.scissor()">Scissor [M]</button>
+      <div class="btn" ontouch="player1.rock()" onclick="player2.rock()">Rock [B]</div>
+      <div class="btn" ontouch="player1.paper()" onclick="player2.paper()">Paper [N]</div>
+      <div class="btn" ontouch="player1.scissors()" onclick="player2.scissors()">Scissor [M]</div>
     </div>
   </div>
-  <div class="flex-area">
-    <div>
+  <div class="flex-area weapon">
+    <div class="player1-weapon">
       Player 1 choose:
       <div class="img-container">
         <img id="player1Choose"></img>
@@ -39,9 +40,14 @@
     </div>
     <div class="playAgain">
       <div id="countdown"></div>
-      Play Again [Space Bar]
+      <div class="btn">
+        <i class="fas fa-redo"></i>
+      </div>
+      <div>
+        Play Again [Space Bar]
+      </div>
     </div>
-    <div>
+    <div class="player2-weapon">
       Player 2 choose: 
       <div class="img-container">
         <img id="player2Choose"></img>
