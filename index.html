@@ -5,18 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <title>Rock|Paper|Scissor</title>
+  <link rel="stylesheet" href="libs/fontawesome-all.min.css">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet"
+  <!-- <link rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css"
   integrity="sha384-OHBBOqpYHNsIqQy8hL1U+8OXf9hH6QRxi0+EODezv82DfnZoV7qoHAZDwMwEJvSw"
-  crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-  <script src="script.js"></script>
+  crossorigin="anonymous"> -->
+
+  <!-- Libraries -->
+  <script src="libs/TweenMax.min.js"></script>
+  <script src="libs/TimelineMax.min.js"></script>
+  
 </head>
 
 <body>
-  <div class="flex-area">
-    <div class="player-area player1">
+  <!-- <div class="flex-area">
+    <div class="player-area">
       <div>
         <h1 id="player1Name">Player 1</h1>
         <div class="btn" ontouch="player1.rock()" onclick="player1.rock()"><i class="fas fa-hand-rock"></i></div>
@@ -53,8 +57,38 @@
         <img id="player2Choose"></img>
       </div>
     </div>
+  </div> -->
+  <div class="container">
+    <div class="player-area">
+      <div>
+        <div id="player1Choose" class="btn big"></div>
+      </div>
+      <div class="btn" onclick="player1.chooseRock()">
+        <i class="fas fa-hand-rock"></i>
+      </div>
+      <div class="btn" onclick="player1.choosePaper()">
+          <i class="fas fa-hand-paper"></i>
+      </div>
+      <div class="btn" onclick="player1.chooseScissors()">
+        <i class="fas fa-hand-scissors"></i>
+      </div>
+    </div>
+    <div id="countdown">Press Space to Start</div>
+    <div class="player-area">
+      <div>
+        <div id="player2Choose" class="btn big"></div>
+      </div>
+      <div class="btn" onclick="player2.chooseRock()">
+          <i class="fas fa-hand-rock"></i>
+      </div>
+      <div class="btn" onclick="player2.choosePaper()">
+          <i class="fas fa-hand-paper"></i>
+      </div>
+      <div class="btn" onclick="player2.chooseScissors()">
+        <i class="fas fa-hand-scissors"></i>
+      </div>
+    </div>
   </div>
-
-  
+  <script src="script.js"></script>
 </body>
 </html>

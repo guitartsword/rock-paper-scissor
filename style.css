@@ -1,10 +1,12 @@
-* {
+/* * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
   height: 100vh;
   width: 100vw;
+  background-image: url('assets/paper-pattern-2.jpg');
+  background-size: 50%;
 }
 img{
   max-width: 100%;
@@ -45,7 +47,6 @@ img{
   align-items: center;
   justify-content: center;
   box-shadow: 0px 0px 10px 1px rgb(9, 0, 90);
-
 }
 .flex-area {
   display: flex;
@@ -59,6 +60,61 @@ img{
 }
 .flex-area div{
   text-align: center;
+} */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+.container{
+  display: flex;
+  background-color: rgb(0, 197, 148);
+  height: 100%;
+  align-items: center;
+  text-align: center;
+}
+.btn{
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 50px;
+
+  line-height: 50px;
+  text-align: center;
+
+  margin: 5px;
+  padding-left:5px;
+  padding-right:5px;
+
+  box-shadow: 7px 7px 10px 1px rgba(0, 0, 0, 0.5);
+
+  user-select: none;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.0);
+
+}
+.btn.big{
+  width: 9rem;
+  height: 9rem;
+  border-radius: 9rem;
+}
+.img-container{
+  width: 300px;
+  display: block;
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 10px 1px rgb(9, 0, 90);
+}
+.player-area {
+  width: 50%;
 }
 
 /* From animate.css */

@@ -1,7 +1,7 @@
 class Player{
   constructor(name, choose){
     this.name = name;
-    this.choose= choose;
+    this.choose = choose;
   }
   static get ROCK(){
     return 0b001;
@@ -12,24 +12,32 @@ class Player{
   static get SCISSORS(){
     return 0b010;
   }
-  rock(){
+  chooseRock(){
     this.weapon = Player.ROCK;
     this.choose.src = 'assets/rock.svg';
+    TweenMax.to(this.choose, 0.25, {
+      backgroundColor: 'rgb(206, 158, 86)'
+    });
   }
-  paper(){
+  choosePaper(){
     this.weapon = Player.PAPER;
     this.choose.src = 'assets/paper.svg';
+    TweenMax.to(this.choose, 0.25, {
+      backgroundColor: 'rgb(255,255,215)'
+    });
   }
-  scissors(){
+  chooseScissors(){
     this.weapon = Player.SCISSORS;
     this.choose.src = 'assets/scissors.svg';
+    TweenMax.to(this.choose, 0.25, {
+      backgroundColor: 'rgb(100,100,100)'
+    });
   }
   set username(name){
     this.name.innerText = name;
   }
   hideItem(){
     this.choose.style.display = 'none';
-    this.choose.className = '';
   }
   showItem(){
     this.choose.style.display = '';
@@ -60,10 +68,10 @@ class Player{
     }
   }
   win(){
-    this.choose.className = 'bounce animated infinite';
+    // this.choose.className = 'bounce animated infinite';
   }
   tie(){
-    this.choose.className = 'jello animated infinite';
+    // this.choose.className = 'jello animated infinite';
   }
 }
 class Game{
@@ -74,22 +82,49 @@ class Game{
     this.isCounting = false;
   }
   startCount(time, callback){
-    if(!this.isCounting){
-      this.isCounting = true;
-      this.timer = setInterval(()=>{
-        this.countdown.className = 'rubberBand animated infinite';
-        this.countdown.innerText = time;
-        if(time <= 0){
-          clearInterval(this.timer);
-          this.isCounting = false;
-          this.countdown.className = '';
+    let tl = new TimelineMax()
+    this.countdown.innerText = 3;
+    tl.to(this.countdown, 0.5, {
+      fontSize: '3em'
+    })
+    .to(this.countdown, 0.5, {
+      fontSize: '1em',
+    })
+    .to(this.countdown, 0, {
+      innerText:2
+    })
+    .to(this.countdown, 0.5, {
+      fontSize: '3em'
+    })
+    .to(this.countdown, 0.5, {
+      fontSize: '1em'
+    })
+    .to(this.countdown, 0, {
+      innerText:1
+    })
+    .to(this.countdown, 0.5, {
+      fontSize: '3em'
+    })
+    .to(this.countdown, 0.5, {
+      fontSize: '1em'
+    })
+    tl.addCallback(callback, 3)
+    // if(!this.isCounting){
+    //   this.isCounting = true;
+    //   this.timer = setInterval(()=>{
+    //     this.countdown.className = 'rubberBand animated infinite';
+    //     this.countdown.innerText = time;
+    //     if(time <= 0){
+    //       clearInterval(this.timer);
+    //       this.isCounting = false;
+    //       this.countdown.className = '';
           
-          this.countdown.innerText = 'Game!';
-          callback();
-        }
-        time--;
-      }, 1000);
-    }
+    //       this.countdown.innerText = 'Game!';
+    //       callback();
+    //     }
+    //     time--;
+    //   }, 1000);
+    // }
   }
 }
 let player1, player2, game;
@@ -107,7 +142,10 @@ window.onload = function(){
     document.getElementById('log')
   );
 };
-
+var tl = new TimelineMax({onUpdate:console.log});
+tl.to("#sape", 3, {
+  innerText: (Math.random()*10+1),
+});
 const rock1key = 'z'
 document.addEventListener('keypress', (event) => {
   event.preventDefault();
@@ -115,27 +153,27 @@ document.addEventListener('keypress', (event) => {
   switch(keyName){
     case 'z':
     case 'Z':
-      player1.rock();
+      player1.chooseRock();
       break;
     case 'x':
     case 'X':
-      player1.paper();
+      player1.choosePaper();
       break;
     case 'c':
     case 'C':
-      player1.scissors();
+      player1.chooseScissors();
       break;
     case 'b':
     case 'B':
-      player2.rock();
+      player2.chooseRock();
       break;
     case 'n':
     case 'N':
-      player2.paper();
+      player2.choosePaper();
       break;
     case 'm':
     case 'M':
-      player2.scissors();
+      player2.chooseScissors();
       break;
     case ' ':
       player1.hideItem();
