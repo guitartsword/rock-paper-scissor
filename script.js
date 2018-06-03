@@ -68,10 +68,10 @@ class Player{
     }
   }
   win(){
-    // this.choose.className = 'bounce animated infinite';
+    // TO DO;
   }
   tie(){
-    // this.choose.className = 'jello animated infinite';
+    // TO DO;
   }
 }
 class Game{
@@ -109,22 +109,6 @@ class Game{
       fontSize: '1em'
     })
     tl.addCallback(callback, 3)
-    // if(!this.isCounting){
-    //   this.isCounting = true;
-    //   this.timer = setInterval(()=>{
-    //     this.countdown.className = 'rubberBand animated infinite';
-    //     this.countdown.innerText = time;
-    //     if(time <= 0){
-    //       clearInterval(this.timer);
-    //       this.isCounting = false;
-    //       this.countdown.className = '';
-          
-    //       this.countdown.innerText = 'Game!';
-    //       callback();
-    //     }
-    //     time--;
-    //   }, 1000);
-    // }
   }
 }
 let player1, player2, game;
