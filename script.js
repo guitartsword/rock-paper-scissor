@@ -1,35 +1,38 @@
 class Player{
-  constructor(name, choose){
+  constructor(name, choose, countDOM){
     this.name = name;
     this.choose = choose;
+    this.countDOM = countDOM;
     this.weapon = 0;
+    this.count = 0;
+    this.countDOM.innerText = `Wins: ${this.count}`;
   }
   static get ROCK(){
-    return 0b001;
+    return '\uf255';
   }
   static get PAPER(){
-    return 0b100;
+    return '\uf256';
   }
   static get SCISSORS(){
-    return 0b010;
+    return '\uf257';
   }
   chooseRock(){
     this.weapon = Player.ROCK;
-    this.choose.backgroundImage = 'assets/rock.svg';
+    this.choose.innerText =  this.weapon;
     TweenMax.to(this.choose, 0.25, {
       backgroundColor: 'rgb(206, 158, 86)'
     });
   }
   choosePaper(){
     this.weapon = Player.PAPER;
-    this.choose.src = 'assets/paper.svg';
+    this.choose.innerText = this.weapon;
     TweenMax.to(this.choose, 0.25, {
       backgroundColor: 'rgb(255,255,215)'
     });
   }
   chooseScissors(){
     this.weapon = Player.SCISSORS;
-    this.choose.src = 'assets/scissors.svg';
+    this.choose.innerText = this.weapon;
     TweenMax.to(this.choose, 0.25, {
       backgroundColor: 'rgb(100,100,100)'
     });
@@ -39,7 +42,8 @@ class Player{
   }
   hideItem(){
     this.choose.style.backgroundColor = 'white';
-    this.weapon = 0;
+    this.weapon = '';
+    this.choose.innerText = '';
   }
   showItem(){
     this.choose.style.display = '';
@@ -72,7 +76,9 @@ class Player{
     }
   }
   win(){
-    // TO DO;
+    this.count++;
+    this.countDOM.innerText = `Wins: ${this.count}`;
+    
   }
   tie(){
     // TO DO;
@@ -124,11 +130,13 @@ let player1, player2, game;
 window.onload = function(){
   player1 = new Player(
     document.getElementById('player1Name'),
-    document.getElementById('player1Choose')
+    document.getElementById('player1Choose'),
+    document.getElementById('player1WinCount')
   );
   player2 = new Player(
     document.getElementById('player2Name'),
-    document.getElementById('player2Choose')
+    document.getElementById('player2Choose'),
+    document.getElementById('player2WinCount')
   );
   game = new Game(
     document.getElementById('countdown'),
