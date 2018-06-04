@@ -2,6 +2,7 @@ class Player{
   constructor(name, choose){
     this.name = name;
     this.choose = choose;
+    this.weapon = 0;
   }
   static get ROCK(){
     return 0b001;
@@ -14,7 +15,7 @@ class Player{
   }
   chooseRock(){
     this.weapon = Player.ROCK;
-    this.choose.src = 'assets/rock.svg';
+    this.choose.backgroundImage = 'assets/rock.svg';
     TweenMax.to(this.choose, 0.25, {
       backgroundColor: 'rgb(206, 158, 86)'
     });
@@ -37,7 +38,8 @@ class Player{
     this.name.innerText = name;
   }
   hideItem(){
-    this.choose.style.display = 'none';
+    this.choose.style.backgroundColor = 'white';
+    this.weapon = 0;
   }
   showItem(){
     this.choose.style.display = '';
@@ -65,6 +67,8 @@ class Player{
         return other.weapon === Player.ROCK;
       case Player.SCISSORS:
         return other.weapon === Player.PAPER;
+      default:
+        return false;
     }
   }
   win(){
@@ -84,29 +88,34 @@ class Game{
   startCount(time, callback){
     let tl = new TimelineMax()
     this.countdown.innerText = 3;
-    tl.to(this.countdown, 0.5, {
-      fontSize: '3em'
+    tl.to(this.countdown, 0.5, {  
+      opacity: 1
     })
     .to(this.countdown, 0.5, {
-      fontSize: '1em',
+      opacity: 0,
     })
     .to(this.countdown, 0, {
-      innerText:2
+      innerText:2,
+      opacity:0
     })
     .to(this.countdown, 0.5, {
-      fontSize: '3em'
+      opacity: 1
     })
     .to(this.countdown, 0.5, {
-      fontSize: '1em'
+      opacity: 0
     })
     .to(this.countdown, 0, {
-      innerText:1
+      innerText:1,
+      opacity:0
     })
     .to(this.countdown, 0.5, {
-      fontSize: '3em'
+      opacity: 1
     })
     .to(this.countdown, 0.5, {
-      fontSize: '1em'
+      opacity: 0
+    })
+    .to(this.countdown,0,{
+      opacity:1
     })
     tl.addCallback(callback, 3)
   }
@@ -131,6 +140,20 @@ tl.to("#sape", 3, {
   innerText: (Math.random()*10+1),
 });
 const rock1key = 'z'
+function startGame(){
+  player1.hideItem();
+  player2.hideItem();
+  game.startCount(3,()=>{
+    let status = player1.showWinnerWith(player2);
+    if(status === 'WIN'){
+      game.countdown.innerText = 'PLAYER 1 WINS!';
+    }else if(status === 'TIE'){
+      game.countdown.innerText = "IT'S A TIE";
+    }else{
+      game.countdown.innerText = 'PLAYER 2 WINS!';
+    }
+  });
+}
 document.addEventListener('keypress', (event) => {
   event.preventDefault();
   const keyName = event.key;
@@ -160,18 +183,7 @@ document.addEventListener('keypress', (event) => {
       player2.chooseScissors();
       break;
     case ' ':
-      player1.hideItem();
-      player2.hideItem();
-      game.startCount(3,()=>{
-        let status = player1.showWinnerWith(player2);
-        if(status === 'WIN'){
-          game.countdown.innerText = 'PLAYER 1 WINS!'
-        }else if(status === 'TIE'){
-          game.countdown.innerText = "IT'S A TIE"
-        }else{
-          game.countdown.innerText = 'PLAYER 2 WINS!'          
-        }
-      });
+      startGame();
     default:
       break;
   }
