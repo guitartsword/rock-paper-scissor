@@ -51,6 +51,38 @@ i.fas{
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0.0);
 
 }
+[data-tooltip]{
+  position: relative;
+}
+[data-tooltip]::before, [data-tooltip]::after{
+  position: absolute;
+  left: 50%;
+  opacity: 0;
+  transition: all ease-out 200ms;
+}
+[data-tooltip]::before{
+  content:"";
+  /* TOP RIGHT BOTTOM LEFT*/
+  border-width: 10px 8px 0 8px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.3) transparent transparent transparent;
+  margin-left: -8px;
+  top: -15px;
+}
+[data-tooltip]::after{
+  content: attr(data-tooltip);
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 200px;
+  margin-left: -50px;
+  top: -15px;
+  border-radius: 10px;
+  color: white;
+  transform: translateY(-100%);
+}
+/* HOVER EFFECTS */
+[data-tooltip]:hover::before, [data-tooltip]:hover::after{
+  opacity: 1;
+}
 .btn.big{
   width: 9rem;
   height: 9rem;
