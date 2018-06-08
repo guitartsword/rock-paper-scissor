@@ -1,35 +1,49 @@
 class Player{
-  constructor(name, choose){
+  constructor(name, choose, countDOM){
     this.name = name;
-    this.choose= choose;
+    this.choose = choose;
+    this.countDOM = countDOM;
+    this.weapon = 0;
+    this.count = 0;
+    this.countDOM.innerText = `Wins: ${this.count}`;
   }
   static get ROCK(){
-    return 0b001;
+    return '\uf255';
   }
   static get PAPER(){
-    return 0b100;
+    return '\uf256';
   }
   static get SCISSORS(){
-    return 0b010;
+    return '\uf257';
   }
-  rock(){
+  chooseRock(){
     this.weapon = Player.ROCK;
-    this.choose.src = 'assets/rock.svg';
+    this.choose.innerText =  this.weapon;
+    TweenMax.to(this.choose, 0.25, {
+      backgroundColor: 'rgb(206, 158, 86)'
+    });
   }
-  paper(){
+  choosePaper(){
     this.weapon = Player.PAPER;
-    this.choose.src = 'assets/paper.svg';
+    this.choose.innerText = this.weapon;
+    TweenMax.to(this.choose, 0.25, {
+      backgroundColor: 'rgb(255,255,215)'
+    });
   }
-  scissors(){
+  chooseScissors(){
     this.weapon = Player.SCISSORS;
-    this.choose.src = 'assets/scissors.svg';
+    this.choose.innerText = this.weapon;
+    TweenMax.to(this.choose, 0.25, {
+      backgroundColor: 'rgb(100,100,100)'
+    });
   }
   set username(name){
     this.name.innerText = name;
   }
   hideItem(){
-    this.choose.style.display = 'none';
-    this.choose.className = '';
+    this.choose.style.backgroundColor = 'white';
+    this.weapon = '';
+    this.choose.innerText = '';
   }
   showItem(){
     this.choose.style.display = '';
@@ -57,13 +71,17 @@ class Player{
         return other.weapon === Player.ROCK;
       case Player.SCISSORS:
         return other.weapon === Player.PAPER;
+      default:
+        return false;
     }
   }
   win(){
-    this.choose.className = 'bounce animated infinite';
+    this.count++;
+    this.countDOM.innerText = `Wins: ${this.count}`;
+    
   }
   tie(){
-    this.choose.className = 'jello animated infinite';
+    // TO DO;
   }
 }
 class Game{
@@ -74,82 +92,106 @@ class Game{
     this.isCounting = false;
   }
   startCount(time, callback){
-    if(!this.isCounting){
-      this.isCounting = true;
-      this.timer = setInterval(()=>{
-        this.countdown.className = 'rubberBand animated infinite';
-        this.countdown.innerText = time;
-        if(time <= 0){
-          clearInterval(this.timer);
-          this.isCounting = false;
-          this.countdown.className = '';
-          
-          this.countdown.innerText = 'Game!';
-          callback();
-        }
-        time--;
-      }, 1000);
-    }
+    let tl = new TimelineMax()
+    this.countdown.innerText = 3;
+    tl.to(this.countdown, 0.5, {  
+      opacity: 1
+    })
+    .to(this.countdown, 0.5, {
+      opacity: 0,
+    })
+    .to(this.countdown, 0, {
+      innerText:2,
+      opacity:0
+    })
+    .to(this.countdown, 0.5, {
+      opacity: 1
+    })
+    .to(this.countdown, 0.5, {
+      opacity: 0
+    })
+    .to(this.countdown, 0, {
+      innerText:1,
+      opacity:0
+    })
+    .to(this.countdown, 0.5, {
+      opacity: 1
+    })
+    .to(this.countdown, 0.5, {
+      opacity: 0
+    })
+    .to(this.countdown,0,{
+      opacity:1
+    })
+    tl.addCallback(callback, 3)
   }
 }
 let player1, player2, game;
 window.onload = function(){
   player1 = new Player(
     document.getElementById('player1Name'),
-    document.getElementById('player1Choose')
+    document.getElementById('player1Choose'),
+    document.getElementById('player1WinCount')
   );
   player2 = new Player(
     document.getElementById('player2Name'),
-    document.getElementById('player2Choose')
+    document.getElementById('player2Choose'),
+    document.getElementById('player2WinCount')
   );
   game = new Game(
     document.getElementById('countdown'),
     document.getElementById('log')
   );
 };
-
+var tl = new TimelineMax({onUpdate:console.log});
+tl.to("#sape", 3, {
+  innerText: (Math.random()*10+1),
+});
 const rock1key = 'z'
+function startGame(){
+  player1.hideItem();
+  player2.hideItem();
+  game.startCount(3,()=>{
+    let status = player1.showWinnerWith(player2);
+    if(status === 'WIN'){
+      game.countdown.innerText = 'PLAYER 1 WINS!';
+    }else if(status === 'TIE'){
+      game.countdown.innerText = "IT'S A TIE";
+    }else{
+      game.countdown.innerText = 'PLAYER 2 WINS!';
+    }
+  });
+}
 document.addEventListener('keypress', (event) => {
   event.preventDefault();
   const keyName = event.key;
   switch(keyName){
     case 'z':
     case 'Z':
-      player1.rock();
+      player1.chooseRock();
       break;
     case 'x':
     case 'X':
-      player1.paper();
+      player1.choosePaper();
       break;
     case 'c':
     case 'C':
-      player1.scissors();
+      player1.chooseScissors();
       break;
     case 'b':
     case 'B':
-      player2.rock();
+      player2.chooseRock();
       break;
     case 'n':
     case 'N':
-      player2.paper();
+      player2.choosePaper();
       break;
     case 'm':
     case 'M':
-      player2.scissors();
+      player2.chooseScissors();
       break;
     case ' ':
-      player1.hideItem();
-      player2.hideItem();
-      game.startCount(3,()=>{
-        let status = player1.showWinnerWith(player2);
-        if(status === 'WIN'){
-          game.countdown.innerText = 'PLAYER 1 WINS!'
-        }else if(status === 'TIE'){
-          game.countdown.innerText = "IT'S A TIE"
-        }else{
-          game.countdown.innerText = 'PLAYER 2 WINS!'          
-        }
-      });
+      startGame();
     default:
       break;
   }
