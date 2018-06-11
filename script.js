@@ -6,6 +6,9 @@ class Player{
     this.weapon = 0;
     this.count = 0;
     this.countDOM.innerText = `Wins: ${this.count}`;
+    this.choose.addEventListener('animationend', ()=>{
+      this.choose.style.animation = ''
+    });
   }
   static get ROCK(){
     return '\uf255';
@@ -78,10 +81,10 @@ class Player{
   win(){
     this.count++;
     this.countDOM.innerText = `Wins: ${this.count}`;
-    
+    this.choose.style.animation = 'rotation 2s';
   }
   tie(){
-    // TO DO;
+    this.choose.style.animation = 'semi-rotation 2s';
   }
 }
 class Game{

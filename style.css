@@ -110,24 +110,17 @@ i.fas{
   bottom: 50px;
   right: 50px;
 }
-/* From animate.css */
-@keyframes pulse {
-  from {
-    transform: scale3d(1, 1, 1);
-  }
-
-  50% {
-    transform: scale3d(1.05, 1.05, 1.05);
-  }
-
-  to { 
-    transform: scale3d(1, 1, 1);
+@keyframes rotation{
+  from{
+    transform: rotateY(1800deg);
   }
 }
+@keyframes semi-rotation {
+  30% {
+    transform: rotateZ(90deg);
+  }
 
-.pulse {
-  animation-name: pulse;
-  animation-duration: 1s;
-  animation-fill-mode: both;
-  animation-iteration-count: infinite;
+  60% { 
+    transform: rotateZ(-90deg);
+  }
 }
